@@ -1,0 +1,5 @@
+{
+  "name": "BuildTrack AI",
+  "description": "AI-powered construction progress tracker that automatically classifies site photos into project stages.",
+  "requestFramePermissions": []
+}
