@@ -16,7 +16,18 @@ __pycache__/
 # Database
 construction.db
 construction.db-journal
+construction.db-shm
+construction.db-wal
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
 
 # IDEs
 .vscode/
 .idea/
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
