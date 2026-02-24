@@ -2,9 +2,9 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# BuildTrack AI
+# SiteSight AI
 
-BuildTrack AI is an AI-powered construction progress tracker that automatically classifies site photos into project stages using Gemini AI.
+SiteSight AI is an AI-powered construction progress tracker that automatically classifies site photos into project stages using Gemini AI.
 
 ## Features
 - **AI Classification**: Automatically categorizes site photos (Excavation, Framing, Enclosure, Interior).

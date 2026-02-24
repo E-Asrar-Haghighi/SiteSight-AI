@@ -5,13 +5,13 @@
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { 
-  LayoutDashboard, 
-  Upload, 
-  Image as ImageIcon, 
-  Filter, 
-  CheckCircle2, 
-  Clock, 
+import {
+  LayoutDashboard,
+  Upload,
+  Image as ImageIcon,
+  Filter,
+  CheckCircle2,
+  Clock,
   HardHat,
   ChevronRight,
   Loader2,
@@ -58,17 +58,17 @@ export default function App() {
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setIsAnalyzing(true);
-    
+
     for (const file of acceptedFiles) {
       const reader = new FileReader();
-      
+
       const promise = new Promise<void>((resolve) => {
         reader.onload = async () => {
           const base64 = (reader.result as string).split(',')[1];
           const mimeType = file.type;
-          
+
           const analysis = await analyzeConstructionImage(base64, mimeType);
-          
+
           const newPhoto = {
             id: Math.random().toString(36).substr(2, 9),
             imageData: base64,
@@ -85,7 +85,7 @@ export default function App() {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(newPhoto),
             });
-            
+
             if (response.ok) {
               await fetchPhotos(); // Refresh list
             }
@@ -95,7 +95,7 @@ export default function App() {
           resolve();
         };
       });
-      
+
       reader.readAsDataURL(file);
       await promise;
     }
@@ -137,7 +137,7 @@ export default function App() {
   return (
     <div className="flex h-screen bg-[#0A0A0A] overflow-hidden">
       {/* Sidebar */}
-      <motion.aside 
+      <motion.aside
         initial={false}
         animate={{ width: sidebarOpen ? 280 : 80 }}
         className="border-r border-zinc-800 bg-zinc-900/50 flex flex-col"
@@ -147,49 +147,49 @@ export default function App() {
             <HardHat className="text-black w-6 h-6" />
           </div>
           {sidebarOpen && (
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="font-bold text-xl tracking-tight"
             >
-              BuildTrack<span className="text-emerald-500">AI</span>
+              SiteSight<span className="text-emerald-500">AI</span>
             </motion.span>
           )}
         </div>
 
         <nav className="flex-1 px-4 space-y-2">
-          <SidebarItem 
-            icon={<LayoutDashboard size={20} />} 
-            label="Dashboard" 
-            active={currentView === 'dashboard'} 
-            collapsed={!sidebarOpen} 
+          <SidebarItem
+            icon={<LayoutDashboard size={20} />}
+            label="Dashboard"
+            active={currentView === 'dashboard'}
+            collapsed={!sidebarOpen}
             onClick={() => setCurrentView('dashboard')}
           />
-          <SidebarItem 
-            icon={<ImageIcon size={20} />} 
-            label="Gallery" 
-            active={currentView === 'gallery'} 
-            collapsed={!sidebarOpen} 
+          <SidebarItem
+            icon={<ImageIcon size={20} />}
+            label="Gallery"
+            active={currentView === 'gallery'}
+            collapsed={!sidebarOpen}
             onClick={() => setCurrentView('gallery')}
           />
-          <SidebarItem 
-            icon={<Clock size={20} />} 
-            label="Timeline" 
-            active={currentView === 'timeline'} 
-            collapsed={!sidebarOpen} 
+          <SidebarItem
+            icon={<Clock size={20} />}
+            label="Timeline"
+            active={currentView === 'timeline'}
+            collapsed={!sidebarOpen}
             onClick={() => setCurrentView('timeline')}
           />
-          <SidebarItem 
-            icon={<HelpCircle size={20} />} 
-            label="User Guide" 
-            active={currentView === 'guide'} 
-            collapsed={!sidebarOpen} 
+          <SidebarItem
+            icon={<HelpCircle size={20} />}
+            label="User Guide"
+            active={currentView === 'guide'}
+            collapsed={!sidebarOpen}
             onClick={() => setCurrentView('guide')}
           />
         </nav>
 
         <div className="p-4 border-t border-zinc-800">
-          <button 
+          <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="w-full flex items-center justify-center p-2 rounded-lg hover:bg-zinc-800 transition-colors text-zinc-400"
           >
@@ -217,8 +217,8 @@ export default function App() {
             {currentView === 'dashboard' && (
               <>
                 {/* Upload Zone */}
-                <div 
-                  {...getRootProps()} 
+                <div
+                  {...getRootProps()}
                   className={cn(
                     "relative group cursor-pointer rounded-2xl border-2 border-dashed transition-all duration-300 p-12 flex flex-col items-center justify-center gap-4",
                     isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/40",
@@ -246,18 +246,18 @@ export default function App() {
                 {/* Filters & Stats */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div className="flex flex-wrap gap-2">
-                    <FilterButton 
-                      label="Show All" 
-                      active={activeFilter === 'All'} 
-                      onClick={() => setActiveFilter('All')} 
+                    <FilterButton
+                      label="Show All"
+                      active={activeFilter === 'All'}
+                      onClick={() => setActiveFilter('All')}
                       count={photos.length}
                     />
                     {STAGES.map(stage => (
-                      <FilterButton 
+                      <FilterButton
                         key={stage}
-                        label={stage} 
-                        active={activeFilter === stage} 
-                        onClick={() => setActiveFilter(stage)} 
+                        label={stage}
+                        active={activeFilter === stage}
+                        onClick={() => setActiveFilter(stage)}
                         count={stats[stage]}
                       />
                     ))}
@@ -280,18 +280,18 @@ export default function App() {
                 <div className="flex items-center justify-between">
                   <h3 className="text-2xl font-bold">Photo Gallery</h3>
                   <div className="flex gap-2">
-                    <FilterButton 
-                      label="All" 
-                      active={activeFilter === 'All'} 
-                      onClick={() => setActiveFilter('All')} 
+                    <FilterButton
+                      label="All"
+                      active={activeFilter === 'All'}
+                      onClick={() => setActiveFilter('All')}
                       count={photos.length}
                     />
                     {STAGES.map(stage => (
-                      <FilterButton 
+                      <FilterButton
                         key={stage}
-                        label={stage} 
-                        active={activeFilter === stage} 
-                        onClick={() => setActiveFilter(stage)} 
+                        label={stage}
+                        active={activeFilter === stage}
+                        onClick={() => setActiveFilter(stage)}
                         count={stats[stage]}
                       />
                     ))}
@@ -343,27 +343,27 @@ export default function App() {
                 <div className="space-y-4">
                   <h3 className="text-4xl font-bold tracking-tight">User Guide</h3>
                   <p className="text-zinc-400 text-lg">
-                    BuildTrack AI uses advanced computer vision to help project managers and stakeholders track construction progress automatically.
+                    SiteSight AI uses advanced computer vision to help project managers and stakeholders track construction progress automatically.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <GuideCard 
+                  <GuideCard
                     icon={<Zap className="text-amber-500" />}
                     title="AI Classification"
                     description="Every photo you upload is analyzed by Gemini AI to determine the current stage of construction with high precision."
                   />
-                  <GuideCard 
+                  <GuideCard
                     icon={<Database className="text-blue-500" />}
                     title="Persistent Memory"
                     description="All site data and classifications are stored in a secure SQLite database, ensuring your project history is never lost."
                   />
-                  <GuideCard 
+                  <GuideCard
                     icon={<ImageIcon className="text-purple-500" />}
                     title="Visual Insights"
                     description="The AI doesn't just categorize; it provides specific insights into what it sees, like 'Reinforced steel visible' or 'Drywall started'."
                   />
-                  <GuideCard 
+                  <GuideCard
                     icon={<ShieldCheck className="text-emerald-500" />}
                     title="Stage Tracking"
                     description="Automatically track progress through Excavation, Framing, Enclosure, and Interior Finishing stages."
@@ -372,7 +372,7 @@ export default function App() {
 
                 <div className="prose prose-invert max-w-none bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
                   <Markdown>{`
-### How to use BuildTrack AI
+### How to use SiteSight AI
 
 1. **Upload Photos**: Go to the **Dashboard** and drag your site photos into the upload zone. You can upload multiple images at once.
 2. **AI Analysis**: Wait a few seconds while the AI analyzes each image. It will determine the construction stage and generate a brief insight.
@@ -426,7 +426,7 @@ function GuideCard({ icon, title, description }: { icon: React.ReactNode, title:
 
 function SidebarItem({ icon, label, active, collapsed, onClick }: { icon: React.ReactNode, label: string, active: boolean, collapsed: boolean, onClick: () => void }) {
   return (
-    <div 
+    <div
       onClick={onClick}
       className={cn(
         "flex items-center gap-3 p-3 rounded-xl transition-all cursor-pointer",
@@ -449,14 +449,14 @@ function PhotoCard({ photo, onRemove }: { photo: ConstructionPhoto, onRemove: (i
       className="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all shadow-xl"
     >
       <div className="aspect-[4/3] overflow-hidden relative">
-        <img 
-          src={photo.url} 
+        <img
+          src={photo.url}
           alt={photo.fileName}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        
-        <button 
+
+        <button
           onClick={() => onRemove(photo.id)}
           className="absolute top-3 right-3 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500"
         >
@@ -472,7 +472,7 @@ function PhotoCard({ photo, onRemove }: { photo: ConstructionPhoto, onRemove: (i
           </span>
         </div>
       </div>
-      
+
       <div className="p-4 space-y-2">
         <div className="flex items-start justify-between gap-2">
           <p className="text-xs font-mono text-zinc-500 truncate flex-1">
@@ -497,12 +497,12 @@ function PhotoCard({ photo, onRemove }: { photo: ConstructionPhoto, onRemove: (i
 
 function FilterButton({ label, active, onClick, count }: { label: string, active: boolean, onClick: () => void, count: number }) {
   return (
-    <button 
+    <button
       onClick={onClick}
       className={cn(
         "px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2",
-        active 
-          ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/20" 
+        active
+          ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/20"
           : "bg-zinc-900 text-zinc-400 border border-zinc-800 hover:border-zinc-700"
       )}
     >
