@@ -2,6 +2,15 @@
 
 SiteSight AI is an AI-powered construction progress tracker that automatically classifies site photos into project stages using Gemini AI.
 
+<p align="center">
+  <img src="assets/1.png" width="600"/>
+  <img src="assets/2.png" width="600"/>
+  <img src="assets/B.png" width="600"/>
+  <img src="assets/6.png" width="600"/>
+  <img src="assets/7.png" width="600"/>
+  
+</p>
+
 ## Features
 - **AI Classification**: Automatically categorizes site photos (Excavation, Framing, Enclosure, Interior).
 - **Visual Insights**: Provides AI-generated technical insights for each photo.
