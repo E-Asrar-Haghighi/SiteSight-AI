@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configuration
-Create a `.env.local` file (already initialized as a template) and add your API key:
+Copy `.env.example` to `.env.local` and add your API key:
 ```env
 GEMINI_API_KEY="your_api_key_here"
 ```
